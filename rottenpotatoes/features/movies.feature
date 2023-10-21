@@ -16,3 +16,4 @@ Feature: Create movie
     Then I should be on the movies page
     And I should see "New Movie was successfully created."
     And I should see "New Movie"
+  

@@ -42,4 +42,23 @@ RSpec.describe MoviesController, type: :controller do
       end
     end
   end
+  describe "DELETE #destroy" do
+    let!(:movie) { Movie.create!(title: 'Test Movie', director: 'Test Director', rating: 'PG', release_date: '2022-01-01') }
+
+    it "deletes the movie" do
+      expect {
+        delete :destroy, params: { id: movie.id }
+      }.to change(Movie, :count).by(-1)
+    end
+
+    it "redirects to movies#index" do
+      delete :destroy, params: { id: movie.id }
+      expect(response).to redirect_to(movies_path)
+    end
+
+    it "sets a flash message" do
+      delete :destroy, params: { id: movie.id }
+      expect(flash[:notice]).to match(/deleted/)
+    end
+  end
 end

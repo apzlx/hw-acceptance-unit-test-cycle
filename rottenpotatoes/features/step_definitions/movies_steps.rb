@@ -28,3 +28,26 @@ Then(/^the director of "([^"]*)" should be "([^"]*)"$/) do |movie_title, expecte
   movie = Movie.find_by(title: movie_title)
   expect(movie.director).to eq(expected_director)
 end
+
+When /I am on the details page for movie titled "(.*)"/ do |movie_title|
+  movie = Movie.find_by(title: movie_title)
+  visit movie_path(movie)
+end
+
+When(/^I click "Delete"$/) do
+  click_link('Delete')
+end
+
+And(/^I confirm popup$/) do
+  page.driver.browser.switch_to.alert.accept
+end
+
+Then /I should not see "([^"]*)" in the movies list/ do |movie_title|
+  within("#movies") do
+    expect(page).to have_no_content(movie_title)
+  end
+end
+
+When /I dismiss popup/ do
+  page.driver.browser.switch_to.alert.dismiss
+end
