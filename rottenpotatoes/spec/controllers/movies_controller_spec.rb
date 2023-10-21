@@ -23,4 +23,23 @@ RSpec.describe MoviesController, type: :controller do
       end
     end
   end
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new Movie" do
+        expect {
+          post :create, params: { movie: { title: 'New Movie', director: 'John Doe', rating: 'PG', release_date: '2022-01-01' } }
+        }.to change(Movie, :count).by(1)
+      end
+
+      it "redirects to the movies list" do
+        post :create, params: { movie: { title: 'New Movie', director: 'John Doe', rating: 'PG', release_date: '2022-01-01' } }
+        expect(response).to redirect_to(movies_path)
+      end
+
+      it "sets a flash message" do
+        post :create, params: { movie: { title: 'New Movie', director: 'John Doe', rating: 'PG', release_date: '2022-01-01' } }
+        expect(flash[:notice]).to eq 'New Movie was successfully created.'
+      end
+    end
+  end
 end
