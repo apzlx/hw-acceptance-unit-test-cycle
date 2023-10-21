@@ -20,7 +20,13 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    when /^the edit page for "(.*)"$/
+      # Assuming you have a Movie model and it responds to `find_by`
+      movie = Movie.find_by(title: $1)
+      raise "No movie found with title '#{$1}'" unless movie
 
+      # Assuming you have an edit_movie_path helper and it accepts a movie ID
+      edit_movie_path(movie)
     else
       begin
         page_name =~ /^the (.*) page$/
