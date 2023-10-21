@@ -14,6 +14,17 @@ class MoviesController < ApplicationController
     # default: render 'new' template
   end
 
+  def same_director
+    @movie = Movie.find(params[:id])
+    if @movie.director.blank?
+      flash[:notice] = "'#{@movie.title}' has no director info"
+      redirect_to movies_path
+    else
+      @movies = @movie.find_movies_with_same_director
+      render :same_director
+    end
+  end  
+
   def create
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."

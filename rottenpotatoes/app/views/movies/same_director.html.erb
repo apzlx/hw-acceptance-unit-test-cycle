@@ -1,0 +1,11 @@
+<!-- app/views/movies/same_director.html.erb -->
+
+<h1>Movies by <%= @director %></h1>
+
+<ul>
+  <% @movies.each do |movie| %>
+    <li><%= movie.title %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', movies_path %>
