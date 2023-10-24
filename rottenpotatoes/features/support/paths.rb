@@ -30,7 +30,7 @@ module NavigationHelpers
 
       movie_path(movie)  
     when /^the Similar Movies page for "(.*)"$/
-      movie = Movie.find_by(title: $1)
+      movie = Movie.find_by(title: $1).id
       raise "No movie found with title '#{$1}'" unless movie
       same_director_path(movie)
     
