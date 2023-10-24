@@ -47,17 +47,17 @@ RSpec.describe MoviesController, type: :controller do
 
     it "deletes the movie" do
       expect {
-        delete :destroy, params: { id: movie.id }
+        delete :destroy, { id: movie.id }
       }.to change(Movie, :count).by(-1)
     end
 
     it "redirects to movies#index" do
-      delete :destroy, params: { id: movie.id }
+      delete :destroy, { id: movie.id }
       expect(response).to redirect_to(movies_path)
     end
 
     it "sets a flash message" do
-      delete :destroy, params: { id: movie.id }
+      delete :destroy, { id: movie.id }
       expect(flash[:notice]).to match(/deleted/)
     end
   end
