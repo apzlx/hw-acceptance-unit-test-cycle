@@ -21,7 +21,7 @@
   <%= @movie.description %>
 </p>
 
-<%= link_to 'Find Movies With Same Director', same_director_movie_path(id: @movie.id), :class => 'btn btn-secondary' %>
+<%= link_to 'Find Movies With Same Director', same_director_movie_path(id: @movie.id), method: :GET, :class => 'btn btn-secondary' %>
 
 <div class="row">
   <%= link_to 'Edit', edit_movie_path(@movie), :class => 'btn btn-primary col-2' %>
