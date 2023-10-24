@@ -29,10 +29,10 @@ Then(/^the director of "([^"]*)" should be "([^"]*)"$/) do |movie_title, expecte
   expect(movie.director).to eq(expected_director)
 end
 
-When /I am on the details page for movie titled "(.*)"/ do |movie_title|
-  movie = Movie.find_by(title: movie_title)
-  visit movie_path(movie)
-end
+# When /I am on the details page for movie titled "(.*)"/ do |movie_title|
+#   movie = Movie.find_by(title: movie_title)
+#   visit movie_path(movie)
+# end
 
 When(/^I click "Delete"$/) do
   click_link('Delete')
