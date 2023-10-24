@@ -15,8 +15,9 @@ class MoviesController < ApplicationController
   end
 
   def same_director
-    @director = Movie.find(params[:id]).director
     @movie = Movie.find(params[:id])
+    @director = @movie.director
+  
     if @director.blank?
       flash[:notice] = "'#{@movie.title}' has no director info"
       redirect_to movies_path
@@ -24,7 +25,7 @@ class MoviesController < ApplicationController
       @movies = Movie.find_movies_with_same_director(@director)
       render :same_director
     end
-  end  
+  end 
 
   def create
     @movie = Movie.create!(movie_params)
